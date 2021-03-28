@@ -62,7 +62,15 @@ print("\n\n")
 url = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?"
 query = illness[0]
 inputtype="textquery"
-fields="formatted_address,name,types"
+fields="formatted_address,name"
 
 response = requests.get(url + "input=" + query + "&inputtype=" + inputtype + "&fields=" + fields + "&key=" + placesKey).json()
-print(response["candidates"])
+
+
+#medLocations = response["candidates"][0]
+#print(medLocations)
+for medLocations in response["candidates"]:
+  print("Health location(s) that may be of help to you:")
+  print("\t" + medLocations.get("name"))
+  print("\t" + medLocations.get("formatted_address"))
+  print()
