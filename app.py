@@ -1,3 +1,4 @@
+  
 import requests
 import os
 import openai
@@ -22,7 +23,6 @@ if "i" not in firstLetter.lower():
 response = openai.Completion.create(
   engine="davinci",
   prompt="""Apollo is a doctor that is providing the patient a general medical diagnosis.\n\n\"\"\"\n\n
-
             Patient: I have been coughing, nasal congestion, and it's been difficult to breath. I feel dizzy and I can't sleep. What am I experiencing?\n\n
             Apollo: Flu - a viral infection that causes a fever, cough, sore throat, and body aches. It is spread through the air when people cough or sneeze. It can also be spread through direct contact with infected people.\n\n
             Patient: What is the best way to treat the flu?\n\n
@@ -32,7 +32,6 @@ response = openai.Completion.create(
             Apollo: Scurvy - a disease that is caused by a vitamin C deficiency.\n\n
             Patient: What is the best way to trDizzeat scurvy?\n\n
             Apollo: The best way to treat scurvy is to eat fresh fruits and vegetables that are rich in Vitamin C\n\n\"\"\"\n\n
-
             Patient: I have been feeling like I have a lot of mucus in my throat and can't breath. What am I experiencing?\n\n
             Apollo: Postnasal drip - the accumulation of mucus in the nose and throat.\n\n
             Patient: What is the best way to treat Postnasal drip?\n\n
@@ -65,12 +64,14 @@ inputtype="textquery"
 fields="formatted_address,name"
 
 response = requests.get(url + "input=" + query + "&inputtype=" + inputtype + "&fields=" + fields + "&key=" + placesKey).json()
+status = response["status"]
 
-
-#medLocations = response["candidates"][0]
-#print(medLocations)
-for medLocations in response["candidates"]:
-  print("Health location(s) that may be of help to you:")
-  print("\t" + medLocations.get("name"))
-  print("\t" + medLocations.get("formatted_address"))
+if "ZERO_RESULTS" in status:
+  print("There is no specialized facility for " + illness[0] + " in your area.")
   print()
+else:
+  for medLocations in response["candidates"]:
+    print("Health location(s) that may be of help to you:")
+    print("\t" + medLocations.get("name"))
+    print("\t" + medLocations.get("formatted_address"))
+    print()
