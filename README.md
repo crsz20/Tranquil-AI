@@ -1,5 +1,5 @@
 # HackAI-2021
-Expects a list of symptoms that the user may be experiencing, and provides a simple diagnosis and prediction of potential illnesses. The program also suggests treatment and performs a search query to find the user a near location of a facility that may be of help. This project is for **HackAI**, an AI-focused hackathon held by AIS at UTD.
+**Tranquil.ai** - Expects a list of symptoms that the user may be experiencing, and provides a simple diagnosis and prediction of potential illnesses. The program also suggests treatment and performs a search query to find the user a near location of a facility that may be of help. This project is for **HackAI**, an AI-focused hackathon held by AIS at UTD.
 ***
 
 ## Technologies
