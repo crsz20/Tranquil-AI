@@ -43,7 +43,7 @@ response = openai.Completion.create(
             Patient: """ + inputString + """. What am I experiencing?\n\n
             Apollo:""",
   temperature=0.7,
-  max_tokens=64,
+  max_tokens=100,
   top_p=1,
   frequency_penalty=0,
   presence_penalty=0
@@ -69,8 +69,8 @@ if "ZERO_RESULTS" in status:
   print("There is no specialized facility for " + illness[0] + " in your area.")
   print()
 else:
+  print("Health location(s) that may be of help to you:")
   for medLocations in response["candidates"]:
-    print("Health location(s) that may be of help to you:")
     print("\t" + medLocations.get("name"))
     print("\t" + medLocations.get("formatted_address"))
     print()
