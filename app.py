@@ -3,7 +3,6 @@ import requests
 import os
 import openai
 from dotenv import load_dotenv
-#https://www.twilio.com/blog/environment-variables-python#:~:text=Below%20you%20can%20see%20how%20to%20import%20a,variable%20definitions%20in%20it%20to%20the%20os.environ%20dictionary.
 
 load_dotenv()
 openai.api_key = os.environ['OPENAI_KEY']
@@ -18,8 +17,7 @@ firstLetter = inputString[0]
 if "i" not in firstLetter.lower():
     inputString = "I have been " + inputString
 
-
-
+#OpenAI API Call
 response = openai.Completion.create(
   engine="davinci",
   prompt="""Apollo is a doctor that is providing the patient a general medical diagnosis.\n\n\"\"\"\n\n
@@ -54,10 +52,10 @@ response = openai.Completion.create(
 info = response.get("choices")
 answer = info[0].get("text")
 illness = answer.split('-')
-print(illness[0] + illness[1]) #illness keyword + description and suggestion follow up actions
-
+print(illness[0] + " - " + illness[1]) #illness keyword + description and suggestion follow up action
 print("\n\n")
 
+#Places API Call
 url = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?"
 query = illness[0]
 inputtype="textquery"
@@ -66,6 +64,7 @@ fields="formatted_address,name"
 response = requests.get(url + "input=" + query + "&inputtype=" + inputtype + "&fields=" + fields + "&key=" + placesKey).json()
 status = response["status"]
 
+#Report findings
 if "ZERO_RESULTS" in status:
   print("There is no specialized facility for " + illness[0] + " in your area.")
   print()
