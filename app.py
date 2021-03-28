@@ -7,11 +7,14 @@ load_dotenv()
 openai.api_key = os.environ['API_KEY']
 
 #get input about the symptoms
-inputString = input("How have you been feelings? ")
+inputString = input("How have you been feeling? ")
 
-index = inputString.lower().find("i have been")
-if index != -1:
-    inputString = inputString[0: index:] + inputString[index + 11::]
+#Ensure user is referring to self
+firstLetter = inputString[0]
+if "i" not in firstLetter.lower():
+    inputString = "I have been " + inputString
+
+
 
 response = openai.Completion.create(
   engine="davinci",
@@ -24,7 +27,7 @@ response = openai.Completion.create(
             
             Patient: I have been having chest pain and sore throat. What am I experiencing?\n\n
             Apollo: Scurvy - a disease that is caused by a vitamin C deficiency.\n\n
-            Patient: What is the best way to treat scurvy?\n\n
+            Patient: What is the best way to trDizzeat scurvy?\n\n
             Apollo: The best way to treat scurvy is to eat fresh fruits and vegetables that are rich in Vitamin C\n\n\"\"\"\n\n
 
             Patient: I have been feeling like I have a lot of mucus in my throat and can't breath. What am I experiencing?\n\n
@@ -37,8 +40,8 @@ response = openai.Completion.create(
             Patient: What is the best way to treat otitis media?\n\n
             Apollo: The best way to treat otitis media is to treat the infection with antibiotics.\n\n\"\"\"\n\n
             
-            Patient: I have been""" + inputString + """. What am I experiencing?\n\n
-            Apollo: """,
+            Patient: """ + inputString + """. What am I experiencing?\n\n
+            Apollo:""",
   temperature=0.7,
   max_tokens=64,
   top_p=1,
@@ -49,4 +52,4 @@ response = openai.Completion.create(
 info = response.get("choices")
 answer = info[0].get("text")
 illness = answer.split('-')
-illness
+print(illness[0] + illness[1]) #illness keyword + description and suggestion follow up actions
