@@ -1,10 +1,13 @@
+import requests
 import os
 import openai
 from dotenv import load_dotenv
 #https://www.twilio.com/blog/environment-variables-python#:~:text=Below%20you%20can%20see%20how%20to%20import%20a,variable%20definitions%20in%20it%20to%20the%20os.environ%20dictionary.
 
 load_dotenv()
-openai.api_key = os.environ['API_KEY']
+openai.api_key = os.environ['OPENAI_KEY']
+placesKey = os.environ['PLACES_KEY']
+
 
 #get input about the symptoms
 inputString = input("How have you been feeling? ")
@@ -53,3 +56,13 @@ info = response.get("choices")
 answer = info[0].get("text")
 illness = answer.split('-')
 print(illness[0] + illness[1]) #illness keyword + description and suggestion follow up actions
+
+print("\n\n")
+
+url = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?"
+query = illness[0]
+inputtype="textquery"
+fields="formatted_address,name,types"
+
+response = requests.get(url + "input=" + query + "&inputtype=" + inputtype + "&fields=" + fields + "&key=" + placesKey).json()
+print(response["candidates"])
