@@ -6,3 +6,4 @@ Provides a simple diagnosis of potential illnesses that corresponds to the user'
 ## Technologies
 * OpenAI's beta API
   * Engine: davinci
+* Google Maps Places API
