@@ -4,12 +4,13 @@
 
 ## Technologies
 * [OpenAI's beta API](https://beta.openai.com/docs/introduction)
-  * Engine: davinci
-  * Receives a dataset of a conversation between a patient and a doctor, Apollo
+  * Engine: davinci, a pre-trained model
+  * Receives a dataset of a conversation between a patient and a doctor, Apollo, to perform text completion
   * The dataset maintains a pattern so that the API will output the first word to identify the potential illness
 * [Google Maps Places API](https://developers.google.com/maps/documentation/places/web-service/search)
   * Find Places Search
-  * Performs a search query using the keyword given by Apollo
+  * Performs a search query using the keyword given by Apollo's diagnosis
+  * Searches nearby locations that specialize in countering the illness
 
 ## Sample Outputs
 ### Sample 1
@@ -35,3 +36,6 @@
 `Health location(s) that may be of help to you:`<br>
 `Texas Institute of Orthopedic Surgery & Sports Medicine`<br>
 `815 Ira E Woods Ave #100, Grapevin, TX 75061, United States`
+
+## What's next for Tranquil.ai
+Creating a GUI to make it more accessible to clients.
