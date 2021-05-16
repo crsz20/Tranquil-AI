@@ -13,6 +13,9 @@ Expects a list of symptoms that the user may be experiencing, and provides a sim
   * Find Places Search
   * Performs a search query using the keyword given by Apollo's diagnosis
   * Searches nearby locations that specialize in countering the illness
+* [Qt for Python (PySide6)](https://doc.qt.io/qtforpython/index.html) - In Progress
+  * GUI Development
+  * Text to Speech
 
 ## Sample Outputs
 ### Sample 1
